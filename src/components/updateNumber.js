@@ -6,21 +6,21 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 
 
 //Material-ui Icons
-import AddIcon from '@material-ui/icons/Add';
+import CreateIcon from '@material-ui/icons/Create';
 
 import useStyles from '../themes/addnumberTheme';
 
-export default function AddnumberDialog(props) {
+export default function UpdatenumberDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [FNAME, setFNAME] = React.useState('');
-  const [LNAME, setLNAME] = React.useState('');
-  const [PHONE, setPHONE] = React.useState('90');
+  const [PHONEID, setPHONEID] = React.useState(props.PHONEID);
+  const [FNAME, setFNAME] = React.useState(props.FNAME);
+  const [LNAME, setLNAME] = React.useState(props.LNAME);
+  const [PHONE, setPHONE] = React.useState(props.PHONE);
   const classes = useStyles();
 
   function handleClickOpen() {
@@ -41,23 +41,20 @@ export default function AddnumberDialog(props) {
       setPHONE(e.target.value);
   }
   
-  function handleSubmit(ID){
-    props.onSubmit(ID, FNAME, LNAME, PHONE);
+  function handleSubmit(){
+    props.updateNumber(props.PHONEID, FNAME, LNAME, PHONE);
     handleClose();
   }
 
   return (
     <div>
-        <Fab color="primary" aria-label="add" className={classes.button} onClick={handleClickOpen}>
-            <AddIcon />
+        <Fab color="primary" aria-label="add" onClick={handleClickOpen} size="small">
+            <CreateIcon />
         </Fab>
         
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add Phone Number</DialogTitle>
+        <DialogTitle id="form-dialog-title">Update Phone Number</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Add phone number to your contact list to use in your forms.
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -90,8 +87,8 @@ export default function AddnumberDialog(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleSubmit(5)} color="primary">
-            Add
+          <Button onClick={() => handleSubmit()} color="primary">
+            Update
           </Button>
         </DialogActions>
       </Dialog>

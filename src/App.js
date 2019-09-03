@@ -8,18 +8,20 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import { createStore } from 'redux';
 import numberReducer from './reducers/numberReducer';
 import { Provider } from 'react-redux';
+import addNumber from './actions/addNumberAction';
 
 var store = createStore(numberReducer,{
-  numbers: [
-    {ID: 1, FNAME: 'Elly', LNAME: 'Smith', PHONE: '+905456895245'},
-    {ID: 2, FNAME: 'Michael', LNAME: 'Johansan', PHONE: '+905412195245'},
-    {ID: 3, FNAME: 'Miller', LNAME: 'Jackson', PHONE: '+905454235245'},
-    {ID: 4, FNAME: 'Johnson', LNAME: 'Anderson', PHONE: '+905123689524'}
-    ]
+  numbers: [],
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
+
 function App() {
+
+  fetch('http://localhost:3636/numbers/1')
+  .then(response => response.json())
+  .then(response => response.data.map(item => store.dispatch(addNumber(item.PHONEID, item.FNAME, item.LNAME, item.PHONE))))
+  
   return (
     <Provider store={store}>
       <Router>

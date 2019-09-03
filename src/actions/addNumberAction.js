@@ -5,9 +5,9 @@ function addNumber(ID, FNAME, LNAME, PHONE){
         type:ADD_NUMBER,
         numbers: {
             ID: ID,
-            FNAME: FNAME,
-            LNAME: LNAME,
-            PHONE: PHONE
+            FNAME: FNAME.toLowerCase(),
+            LNAME: LNAME.toLowerCase(),
+            PHONE: PHONE.toLowerCase()
         }
     }
 }

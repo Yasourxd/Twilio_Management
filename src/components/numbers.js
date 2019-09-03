@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useStyles from '../themes/numberTheme';
+import UpdatenumberDialog from './updateNumber';
 
 //Material-ui Core
 import Grid from '@material-ui/core/Grid';
@@ -11,9 +12,15 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell'
 import TableBody from '@material-ui/core/TableBody';
+import Fab from '@material-ui/core/Fab';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
+
 
 export default function HandleNumbers (props){
     const classes = useStyles();
+
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
@@ -35,17 +42,34 @@ export default function HandleNumbers (props){
                                     <TableCell>First Name</TableCell>
                                     <TableCell>Last Name</TableCell>
                                     <TableCell>Phone Number</TableCell>
+                                    <TableCell className={classes.rightButtonWidth}></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {console.log(props.numbers)}
-                                {props.numbers.map((number) => {
+                                {props.numbers.map((number,count=0) => {
                                     return(
                                         <TableRow>
-                                            <TableCell>{number.ID}</TableCell>
+                                            <TableCell>{++count}</TableCell>
                                             <TableCell>{number.FNAME}</TableCell>
                                             <TableCell>{number.LNAME}</TableCell>
                                             <TableCell>{number.PHONE}</TableCell>
+                                            <TableCell align="right" style={{display:"flex"}}>
+                                                {/* <Fab size="small" color="primary" arial-label="Update" className={classes.updateButton}>
+                                                    <CreateIcon />
+                                                </Fab> */}
+                                                
+                                                <Fab size="small" color="secondary" arial-label="Delete" onClick={() => props.delNumber(number.ID)} className={classes.deleteButton}>
+                                                    <DeleteIcon />
+                                                </Fab>
+                                                <UpdatenumberDialog 
+                                                    PHONEID = {number.ID}
+                                                    FNAME = {number.FNAME}
+                                                    LNAME = {number.LNAME}
+                                                    PHONE = {number.PHONE}
+                                                    updateNumber = {props.updateNumber}
+                                                />
+                                            </TableCell>
                                         </TableRow>
                                     )
                                 })}
