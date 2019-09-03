@@ -20,6 +20,13 @@ import CreateIcon from '@material-ui/icons/Create';
 
 export default function HandleNumbers (props){
     const classes = useStyles();
+    var [filter, setFilter] = React.useState(false);
+    var [numbers, setNumbers] = React.useState([]);
+
+    function handleFilter(value){
+        setNumbers(props.numbers.filter(number => number.FNAME.includes(value) || number.LNAME.includes(value) ||number.PHONE.includes(value)));
+        setFilter(true);
+    }
 
     return (
         <div className={classes.root}>
@@ -30,6 +37,10 @@ export default function HandleNumbers (props){
                             placeholder="Search..."
                             className={[classes.inputRoot, classes.inputInput].join(' ')}
                             inputProps={{'arial-label': 'search'}}
+                            onChange = {e => {
+                                handleFilter(e.target.value);
+                                console.log(e.target.value);
+                            }}
                         />
                     </Paper>
                 </Grid>
@@ -47,18 +58,15 @@ export default function HandleNumbers (props){
                             </TableHead>
                             <TableBody>
                                 {console.log(props.numbers)}
-                                {props.numbers.map((number,count=0) => {
+                                {console.log(filter)}
+                                {(filter ? numbers : props.numbers).map((number,count=0) => {
                                     return(
                                         <TableRow>
                                             <TableCell>{++count}</TableCell>
-                                            <TableCell>{number.FNAME}</TableCell>
-                                            <TableCell>{number.LNAME}</TableCell>
+                                            <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
+                                            <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
                                             <TableCell>{number.PHONE}</TableCell>
                                             <TableCell align="right" style={{display:"flex"}}>
-                                                {/* <Fab size="small" color="primary" arial-label="Update" className={classes.updateButton}>
-                                                    <CreateIcon />
-                                                </Fab> */}
-                                                
                                                 <Fab size="small" color="secondary" arial-label="Delete" onClick={() => props.delNumber(number.ID)} className={classes.deleteButton}>
                                                     <DeleteIcon />
                                                 </Fab>

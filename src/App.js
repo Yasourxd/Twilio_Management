@@ -12,6 +12,7 @@ import addNumber from './actions/addNumberAction';
 
 var store = createStore(numberReducer,{
   numbers: [],
+  filterNumbers: []
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )

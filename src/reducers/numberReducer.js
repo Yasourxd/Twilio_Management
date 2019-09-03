@@ -2,7 +2,7 @@ function numberReducer (state, action){
     switch(action.type){
         case 'ADD_NUMBER':
             return {
-                numbers: state.numbers.concat(action.numbers),
+                numbers: state.numbers.concat(action.numbers)
             }
         case 'DEL_NUMBER':
             return {
