@@ -42,6 +42,7 @@ class Numbers extends React.Component{
                 <AddnumberDialog 
                     onSubmit = {this.onSubmit}
                 />
+                {console.log(this.props.numbers)}
             </HandleNumbers>
             
         )
@@ -50,7 +51,7 @@ class Numbers extends React.Component{
 
 const mapStateToProps = function(state){
     return {
-        numbers: state.numbers
+        numbers: state.numberReducer.numbers
     }
 }
 

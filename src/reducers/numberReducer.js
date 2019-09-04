@@ -1,12 +1,14 @@
-function numberReducer (state, action){
+function numberReducer (state = {
+    numbers: []
+}, action){
     switch(action.type){
         case 'ADD_NUMBER':
             return {
-                numbers: state.numbers.concat(action.numbers)
+                numbers: state.numbers.concat(action.numbers),
             }
         case 'DEL_NUMBER':
             return {
-                numbers: state.numbers.filter(number => number.ID != action.payload)
+                numbers: state.numbers.filter(number => number.ID != action.payload),
             }
         case 'UPDATE_NUMBER':
             return {

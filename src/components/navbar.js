@@ -21,6 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 
 import useStyles from '../themes/navbarTheme';
@@ -94,6 +95,14 @@ export default function HandleNavbar (props){
                                 <ContactPhoneIcon />
                             </ListItemIcon>
                             <ListItemText primary="Contact List" />
+                        </ListItem>
+                    </Link>
+                    <Link to="/forms">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <DescriptionIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Form List" />
                         </ListItem>
                     </Link>
                     <Link to="/submissions">

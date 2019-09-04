@@ -18,7 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
 
-export default function HandleNumbers (props){
+export default function AddedNumber (props){
     const classes = useStyles();
     var [filter, setFilter] = React.useState(false);
     var [numbers, setNumbers] = React.useState([]);
@@ -53,34 +53,23 @@ export default function HandleNumbers (props){
                                     <TableCell className = {classes.header}>First Name</TableCell>
                                     <TableCell className = {classes.header}>Last Name</TableCell>
                                     <TableCell className = {classes.header}>Phone Number</TableCell>
-                                    <TableCell className={[classes.rightButtonWidth, classes.header].join(" ")}>  </TableCell>
+                                    <TableCell className={[classes.rightButtonWidth, classes.header].join(" ")}></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {console.log(props.numbers)}
-                                {console.log(filter)}
-                                {(filter ? numbers : props.numbers).map((number,count=0) => {
-                                    return(
-                                        <TableRow>
-                                            <TableCell>{++count}</TableCell>
-                                            <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
-                                            <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
-                                            <TableCell>{number.PHONE}</TableCell>
-                                            <TableCell align="right" style={{display:"flex"}}>
-                                                <Fab size="small" color="secondary" arial-label="Delete" onClick={() => props.delNumber(number.ID)} className={classes.deleteButton}>
-                                                    <DeleteIcon />
-                                                </Fab>
-                                                <UpdatenumberDialog 
-                                                    PHONEID = {number.ID}
-                                                    FNAME = {number.FNAME}
-                                                    LNAME = {number.LNAME}
-                                                    PHONE = {number.PHONE}
-                                                    updateNumber = {props.updateNumber}
-                                                />
-                                            </TableCell>
-                                        </TableRow>
-                                    )
-                                })}
+                                {
+                                    props.formNumbers.map((number, count=0) => {
+                                        return (
+                                            <TableRow>
+                                                <TableCell>{++count}</TableCell>
+                                                <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
+                                                <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
+                                                <TableCell>{number.PHONE}</TableCell>
+                                                <TableCell></TableCell>
+                                            </TableRow>
+                                        )
+                                    })
+                                }
                             </TableBody>
                             <Grid xs={12} style={{height:'20px'}}>
 
@@ -91,7 +80,6 @@ export default function HandleNumbers (props){
 
                 </Grid>
             </Grid>
-            {props.children}
         </div>
     )
 }

@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
     root:{
         display:"grid",
         marginTop:"20px",
-        position: "relative"
+        position: "relative",
     },
     gridContainer:{
         overflowY: 'scroll',
