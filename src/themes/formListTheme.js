@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
+      position: 'relative'
     },
     paper:{
         // padding: theme.spacing(1,1,1,1),
@@ -13,19 +14,19 @@ const useStyles = makeStyles(theme => ({
     },
     gridContainer:{
         overflowY: 'scroll',
-        height:"calc(100vh - 120px)",
-        // "&::-webkit-scrollbar":{
-        //     width: "0.5em",
-        //     height: "0.5em",
-        // },
-        // "&::-webkit-scrollbar-thumb":{
-        //     backgroundColor: "rgb(194, 70, 120, 0.3)",
-        //     borderRadius: "3px" 
-        // },
-        // "&::-webkit-scrollbar-thumb:hover": {
-        //     background: "rgb(194, 70, 120, 0.5)",
-        //     cursor: "pointer"
-        //  }
+        height:"calc(100vh - 130px)",
+        "&::-webkit-scrollbar":{
+            width: "0.5em",
+            height: "0.5em",
+        },
+        "&::-webkit-scrollbar-thumb":{
+            backgroundColor: "rgb(194, 70, 120, 0.3)",
+            borderRadius: "3px" 
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+            background: "rgb(194, 70, 120, 0.5)",
+            cursor: "pointer"
+         }
     },
     toolbar:{
         display:"flex",
@@ -35,7 +36,12 @@ const useStyles = makeStyles(theme => ({
     },
     ListIcon:{
         minWidth: "25px"
-    }
+    },
+    header: {
+        background: 'white',
+        position: 'sticky',
+        top: 0,
+    },
 }));
 
 export default useStyles;

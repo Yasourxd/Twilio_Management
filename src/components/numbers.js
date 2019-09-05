@@ -48,7 +48,7 @@ export default function HandleNumbers (props){
                     <Paper className={[classes.paper, classes.gridContainer, classes.space].join(' ')} >
                         <Table>
                             <TableHead>
-                                <TableRow> 
+                                <TableRow>
                                     <TableCell className = {classes.header}>ID</TableCell>
                                     <TableCell className = {classes.header}>First Name</TableCell>
                                     <TableCell className = {classes.header}>Last Name</TableCell>
