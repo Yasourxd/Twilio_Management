@@ -66,12 +66,17 @@ const useStyles = makeStyles(theme => ({
           "&>a":{
             color: "inherit",
             textDecorationLine: "none"
-          }
+          },
+          color: "inherit",
+          textDecorationLine: "none"
       },
       logo:{
           width:"180px",
           height:"40px",
           marginRight:"30px"
+      },
+      active:{
+        background: theme.palette.action.selected
       }
 }))
 

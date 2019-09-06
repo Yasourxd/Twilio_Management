@@ -15,7 +15,6 @@ import TableBody from '@material-ui/core/TableBody';
 import Fab from '@material-ui/core/Fab';
 
 import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
 
 
 export default function AddedNumber (props){
@@ -57,17 +56,25 @@ export default function AddedNumber (props){
                                 </TableRow>
                             </TableHead>
                             <TableBody>
+                                
                                 {
-                                    props.formNumbers.map((number, count=0) => {
-                                        return (
-                                            <TableRow>
-                                                <TableCell>{++count}</TableCell>
-                                                <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
-                                                <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
-                                                <TableCell>{number.PHONE}</TableCell>
-                                                <TableCell></TableCell>
-                                            </TableRow>
-                                        )
+                                    
+                                    props.numbers2.map((number, count=0) => {
+                                        if(number.FORMNUMBER == props.selectedForm || props.selectedForm == ""){
+                                            return (
+                                                <TableRow>
+                                                    <TableCell>{++count}</TableCell>
+                                                    <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
+                                                    <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
+                                                    <TableCell>{number.PHONE}</TableCell>
+                                                    <TableCell align="right">
+                                                        <Fab size="small" color="secondary" arial-label="Delete" onClick={() => props.handleDelFormNumber(number.ID)}>
+                                                            <DeleteIcon />
+                                                        </Fab>
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                        }
                                     })
                                 }
                             </TableBody>

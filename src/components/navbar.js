@@ -26,6 +26,9 @@ import DescriptionIcon from '@material-ui/icons/Description';
 
 import useStyles from '../themes/navbarTheme';
 import logo from '../assets/img/logo.png';
+import '../themes/main.css'
+
+import Dashboard from '../containers/dashboard';
 
 export default function HandleNavbar (props){
     const classes = useStyles();
@@ -81,8 +84,8 @@ export default function HandleNavbar (props){
                 </div>
                 <Divider />
                 <List className={classes.links}>
-                    <Link to="/" className={classes.links}>
-                        <ListItem button>
+                    <Link to="/" className={classes.active}>
+                        <ListItem button >
                             <ListItemIcon>
                                 <DashboardIcon />
                             </ListItemIcon>

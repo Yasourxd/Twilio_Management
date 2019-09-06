@@ -18,7 +18,7 @@ import addFormNumber from './actions/addFormNumberAction';
 var store = createStore(rootReducer,{
   numbers: [],
   forms: [],
-  formNumbers: []
+  formNumbers: {}
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
@@ -26,15 +26,15 @@ var store = createStore(rootReducer,{
  function App2() {
    var delayPreventer;
     (async function(){
-      await fetch('http://localhost:3636/numbers/1')
+      fetch('http://localhost:3636/numbers/1')
       .then(response => response.json())
       .then(response => response.data.map(item => store.dispatch(addNumber(item.PHONEID, item.FNAME, item.LNAME, item.PHONE))))
 
-      await fetch('http://localhost:3636/forms/69144066531945e2a1979e118a0b3ddd')
+      fetch('http://localhost:3636/forms/69144066531945e2a1979e118a0b3ddd')
       .then(response => response.json())
       .then(response => response.data.map(item => store.dispatch(addForm(item.id, item.title))))
 
-      await fetch('http://localhost:3636/formnumbers/1')
+      fetch('http://localhost:3636/formnumbers/1')
       .then(response => response.json())
       .then(response => response.data.map(item => store.dispatch(addFormNumber(item.FORMID, item.FORMNUMBER, item.PHONEID, item.FNAME, item.LNAME, item.PHONE))))
     })()

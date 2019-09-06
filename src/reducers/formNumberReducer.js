@@ -4,6 +4,10 @@ function formNumberReducer (state = {formNumbers:[] },action){
             return{
                 formNumbers: state.formNumbers.concat(action.formNumber)
             }
+        case 'DEL_FORMNUMBER':
+            return{
+                formNumbers: state.formNumbers.filter(number => number.ID != action.payload)
+            }
         default:
             return state;
     }

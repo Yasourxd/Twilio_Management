@@ -14,10 +14,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Fab from '@material-ui/core/Fab'
 
 
 //Material-ui Icons
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
 export default function FormList (props){
     const classes = useStyles();
@@ -25,15 +28,17 @@ export default function FormList (props){
     var [filtered, setFiltered] = React.useState(false);
     var [selectedForm, setSelectedForm] = React.useState();
     var [notAddedNumbers, setNotAddedNumbers] = React.useState([]);
+    var [addButtonVisibility, setAddButtonVisibility] = React.useState(false);
 
     function handleFormNumber(id){
         setSelectedForm(id);
         setFilteredFormNumbers(props.formNumbers.filter(number => number.FORMNUMBER == id));
         setFiltered(true);
+        setAddButtonVisibility(true);
     }
 
     function handleNotAdded(){
-        let tempFormNumbers = Array.from(filteredFormNumbers, number => number.PHONE);
+        let tempFormNumbers = Array.from(props.formNumbers.filter(number => number.FORMNUMBER == selectedForm), number => number.PHONE);
         console.log(tempFormNumbers);
         setNotAddedNumbers(props.numbers.filter(number => tempFormNumbers.includes(number.PHONE) ? false : true));
         console.log(props.numbers.filter(number => tempFormNumbers.includes(number.PHONE) ? false : true));
@@ -56,7 +61,7 @@ export default function FormList (props){
                                 return (
                                     <ListItem button onClick={() => handleFormNumber(form.ID)}>
                                         <ListItemIcon className={classes.ListIcon}>
-                                            <ArrowRightIcon />
+                                            <InsertDriveFileIcon />
                                         </ListItemIcon>
                                         <ListItemText primary={form.TITLE} />
                                     </ListItem>
@@ -68,17 +73,31 @@ export default function FormList (props){
                 <Grid item xs= {12} md = {9} >
                     <AddedNumber 
                         formNumbers={filtered ? filteredFormNumbers : [] }
+                        selectedForm = {selectedForm ? selectedForm : ""}
+                        numbers2 = {props.formNumbers}
+                        handleDelFormNumber = {props.handleDelFormNumber}
                     />
                 </Grid>
-            </Grid>
+            </Grid>{addButtonVisibility ? <div style={{position:"absolute",bottom:10,right:70}}>
+                <Fab color="secondary" onClick={fetch("http://localhost:3001/createcall/92293453650964")}>
+                    <PhoneInTalkIcon />
+                </Fab> 
+            </div>: ""
+                
+            }
+            
+            {addButtonVisibility ? 
+            
             <AddFormnNumberDialog
-                selectedForm = {selectedForm}
-                numbers = {props.numbers}
-                handleNotAdded = {handleNotAdded}
-                notAddedNumbers = {notAddedNumbers}
-                handleAddFormNumber = {props.handleAddFormNumber}
-                selectedForm = {selectedForm}
-            />
+            selectedForm = {selectedForm}
+            numbers = {props.numbers}
+            handleNotAdded = {handleNotAdded}
+            notAddedNumbers = {notAddedNumbers}
+            handleAddFormNumber = {props.handleAddFormNumber}
+            selectedForm = {selectedForm}
+            /> : ""
+        }
+            
         </div>
     )
 }
