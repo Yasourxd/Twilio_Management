@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
         position: 'sticky',
         top: 0,
     },
+    active:{
+        background:theme.palette.action.selected
+    }
 }));
 
 export default useStyles;

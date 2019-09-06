@@ -18,7 +18,6 @@ import Fab from '@material-ui/core/Fab'
 
 
 //Material-ui Icons
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
@@ -45,7 +44,6 @@ export default function FormList (props){
 
     }
 
-
     return(
         <div className={classes.root}>
             <Grid container spacing={2}>
@@ -59,7 +57,7 @@ export default function FormList (props){
                         <List>
                             {props.forms.map(form => {
                                 return (
-                                    <ListItem button onClick={() => handleFormNumber(form.ID)}>
+                                    <ListItem button onClick={(e) => handleFormNumber(form.ID)}>
                                         <ListItemIcon className={classes.ListIcon}>
                                             <InsertDriveFileIcon />
                                         </ListItemIcon>

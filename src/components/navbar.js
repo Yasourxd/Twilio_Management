@@ -28,7 +28,7 @@ import useStyles from '../themes/navbarTheme';
 import logo from '../assets/img/logo.png';
 import '../themes/main.css'
 
-import Dashboard from '../containers/dashboard';
+import ListItemLink from './ListItemLink';
 
 export default function HandleNavbar (props){
     const classes = useStyles();
@@ -84,38 +84,30 @@ export default function HandleNavbar (props){
                 </div>
                 <Divider />
                 <List className={classes.links}>
-                    <Link to="/" className={classes.active}>
-                        <ListItem button >
-                            <ListItemIcon>
-                                <DashboardIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Dashboard" />
-                        </ListItem>
-                    </Link>
-                    <Link to="/numbers">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <ContactPhoneIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Contact List" />
-                        </ListItem>
-                    </Link>
-                    <Link to="/forms">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <DescriptionIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Form List" />
-                        </ListItem>
-                    </Link>
-                    <Link to="/submissions">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <AssignmentTurnedInIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Submissions"/>
-                        </ListItem>
-                    </Link>
+                    <ListItemLink
+                        icon = {<DashboardIcon />}
+                        classes = {classes}
+                        title = "Dashboard"
+                        to = "/"
+                    />
+                    <ListItemLink
+                        icon = {<ContactPhoneIcon />}
+                        classes = {classes}
+                        title = "Contact List"
+                        to = "/numbers"
+                    />
+                    <ListItemLink
+                        icon = {<DescriptionIcon />}
+                        classes = {classes}
+                        title = "Form List"
+                        to = "/forms"
+                    />
+                    <ListItemLink
+                        icon = {<AssignmentTurnedInIcon />}
+                        classes = {classes}
+                        title = "Submissions"
+                        to = "/submissions"
+                    />
                 </List>
             </Drawer>
             <main className={classes.content}>
