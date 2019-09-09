@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import useStyles from '../themes/formListTheme';
 import AddedNumber from '../components/addedNumbers';
@@ -57,7 +58,11 @@ export default function FormList (props){
                         <List>
                             {props.forms.map(form => {
                                 return (
-                                    <ListItem button onClick={(e) => handleFormNumber(form.ID)}>
+                                    <ListItem button onClick={(e) => handleFormNumber(form.ID)}
+                                        className={clsx({
+                                            [classes.active]: selectedForm == form.ID
+                                        })}
+                                    >
                                         <ListItemIcon className={classes.ListIcon}>
                                             <InsertDriveFileIcon />
                                         </ListItemIcon>
@@ -71,7 +76,7 @@ export default function FormList (props){
                 <Grid item xs= {12} md = {9} >
                     <AddedNumber 
                         formNumbers={filtered ? filteredFormNumbers : [] }
-                        selectedForm = {selectedForm ? selectedForm : ""}
+                        selectedForm = {selectedForm}
                         numbers2 = {props.formNumbers}
                         handleDelFormNumber = {props.handleDelFormNumber}
                     />

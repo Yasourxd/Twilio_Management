@@ -60,7 +60,7 @@ export default function AddedNumber (props){
                                 {
                                     
                                     props.numbers2.map((number, count=0) => {
-                                        if(number.FORMNUMBER == props.selectedForm || props.selectedForm == ""){
+                                        if(number.FORMNUMBER == props.selectedForm){
                                             return (
                                                 <TableRow>
                                                     <TableCell>{++count}</TableCell>
