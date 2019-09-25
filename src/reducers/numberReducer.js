@@ -1,6 +1,8 @@
-function numberReducer (state = {
+const initialState = {
     numbers: []
-}, action){
+}
+
+function numberReducer (state = initialState, action){
     switch(action.type){
         case 'ADD_NUMBER':
             return {

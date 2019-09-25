@@ -87,6 +87,9 @@ export default function UpdatenumberDialog(props) {
           />
         </DialogContent>
         <DialogActions>
+          <Button onClick={() => handleClose()} color="primary">
+            Cancel
+          </Button>
           <Button onClick={() => handleSubmit()} color="primary">
             Update
           </Button>

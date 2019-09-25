@@ -1,6 +1,6 @@
 const ADD_FORMNUMBER = "ADD_FORMNUMBER";
 
-function addFormNumber(ID, FORMNUMBER, PHONEID, FNAME, LNAME, PHONE){
+function addFormNumber(ID, FORMNUMBER, PHONEID, FNAME, LNAME, PHONE, LOGID, CALLSTATUS, SUBID, CALLSID){
     return {
         type:ADD_FORMNUMBER,
         formNumber: {
@@ -9,7 +9,11 @@ function addFormNumber(ID, FORMNUMBER, PHONEID, FNAME, LNAME, PHONE){
             PHONEID: PHONEID,
             FNAME: FNAME,
             LNAME: LNAME,
-            PHONE: PHONE
+            PHONE: PHONE,
+            LOGID: LOGID || null,
+            CALLSTATUS: CALLSTATUS || 'Not Started',
+            SUBID: SUBID || null,
+            CALLSID: CALLSID || null
         }
     }
 }

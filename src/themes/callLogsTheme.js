@@ -7,9 +7,9 @@ const useStyles = makeStyles(theme => ({
         position: "relative"
     },
     gridContainer:{
-        overflowY: 'scroll',
+        overflow: 'hidden',
+        overFlowX: 'hidden',
         maxHeight:"calc(100vh - 280px)",
-        fontSize:"14px",
         "&::-webkit-scrollbar":{
             width: "0.5em",
             height: "0.5em",
@@ -53,11 +53,35 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#fff',
         position: 'sticky',
         top: 0,
-        fontSize:"14px"
     },
     space:{
-        padding: theme.spacing(0,1,1,2),
-    }
+        padding: theme.spacing(0),
+    },
+    headingID:{
+        fontSize: theme.typography.pxToRem(13),
+        width:"100px",
+        flexShrink: 0,
+        textAlign:"left",
+        color: "rgba(0, 0, 0, 0.54)",
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(13),
+        flexBasis: '16.6%',
+        flexShrink: 0,
+        textAlign:"left",
+        color: "rgba(0, 0, 0, 0.8)",
+    },
+    collapseBody: {
+        fontSize: theme.typography.pxToRem(13),
+        flexBasis: 'calc(calc(100% + 30px)/6)',
+        flexShrink: 0,
+        textAlign:"left",
+        color: "rgba(0, 0, 0, 0.54)",
+    },
+    toolbar:{
+        // borderBottom:"1px solid rgba(224, 224, 224)",
+        minHeight: "40px"
+    },
 }))
 
 export default useStyles;

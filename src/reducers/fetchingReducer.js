@@ -1,4 +1,8 @@
-function fetchingReducer(state = {isFetching:false}, action){
+const initialState = {
+    isFetching: false
+}
+
+function fetchingReducer(state = initialState, action){
     switch (action.type){
         case 'SET_FETCH':
             return {

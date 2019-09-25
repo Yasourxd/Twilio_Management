@@ -11,8 +11,9 @@ const useStyles = makeStyles(theme => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        background: 'linear-gradient(45deg, #9227a6, #fb6b44)',
-        boxShadow:'8px 2px 20px rgba(255, 110, 64, .4)'
+        // background: 'linear-gradient(45deg, #9227a6, #fb6b44)',
+        background: '#1e3799',
+        boxShadow:'8px 2px 20px rgba(0, 0, 0, .02)'
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
       },
       menuButton: {
         marginRight: 36,
+        marginLeft: -16
       },
       hide: {
         display: 'none',
@@ -48,7 +50,7 @@ const useStyles = makeStyles(theme => ({
         overflowX: 'hidden',
         width: theme.spacing(7) + 1,
         [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9) + 1,
+          width: theme.spacing(7) + 1,
         },
       },
       toolbar: {

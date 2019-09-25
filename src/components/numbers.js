@@ -2,6 +2,7 @@ import React from 'react';
 
 import useStyles from '../themes/numberTheme';
 import UpdatenumberDialog from './updateNumber';
+import DeleteNumber from './numberDelete';
 
 //Material-ui Core
 import Grid from '@material-ui/core/Grid';
@@ -39,7 +40,6 @@ export default function HandleNumbers (props){
                             inputProps={{'arial-label': 'search'}}
                             onChange = {e => {
                                 handleFilter(e.target.value);
-                                console.log(e.target.value);
                             }}
                         />
                     </Paper>
@@ -57,8 +57,6 @@ export default function HandleNumbers (props){
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {console.log(props.numbers)}
-                                {console.log(filter)}
                                 {(filter ? numbers : props.numbers).map((number,count=0) => {
                                     return(
                                         <TableRow>
@@ -67,9 +65,15 @@ export default function HandleNumbers (props){
                                             <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
                                             <TableCell>{number.PHONE}</TableCell>
                                             <TableCell align="right" style={{display:"flex"}}>
-                                                <Fab size="small" color="secondary" arial-label="Delete" onClick={() => props.delNumber(number.ID)} className={classes.deleteButton}>
+                                                {/* <Fab  size="small" color="secondary" arial-label="Delete" onClick={() => props.delNumber(number.ID)} className={classes.deleteButton}>
                                                     <DeleteIcon />
-                                                </Fab>
+                                                </Fab> */}
+                                                <DeleteNumber className={classes.deleteButton}
+                                                    title="Do you really want to delete this number permanently?"
+                                                    subtitle="You are deleting this number permanently. This number will also removed from your forms and call logs."
+                                                    action={props.delNumber}
+                                                    ID={number.ID}
+                                                />
                                                 <UpdatenumberDialog 
                                                     PHONEID = {number.ID}
                                                     FNAME = {number.FNAME}

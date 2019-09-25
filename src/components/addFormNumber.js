@@ -105,8 +105,8 @@ export default function AddFormnNumberDialog(props) {
                       />
                     </TableCell>
                     <TableCell>{++count}</TableCell>
-                    <TableCell>{number.FNAME}</TableCell>
-                    <TableCell>{number.LNAME}</TableCell>
+                    <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
+                    <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
                     <TableCell>{number.PHONE}</TableCell>
                   </TableRow>
                 )
@@ -115,6 +115,9 @@ export default function AddFormnNumberDialog(props) {
           </Table>
         </DialogContent>
         <DialogActions>
+          <Button color="secondary" onClick={() => handleClose()}>
+            Cancel
+          </Button>
           <Button color="primary" onClick={() => handleAddButton()}>
             Add
           </Button>

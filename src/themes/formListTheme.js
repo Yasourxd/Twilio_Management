@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "20px"
     },
     gridContainer:{
-        overflowY: 'scroll',
+        overflowY: 'auto',
         height:"calc(100vh - 130px)",
         "&::-webkit-scrollbar":{
             width: "0.5em",

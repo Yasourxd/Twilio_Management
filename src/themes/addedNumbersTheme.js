@@ -2,25 +2,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root:{
-        display:"grid",
-        marginTop:"20px",
+        flexGrow: 1,
         position: "relative",
     },
     gridContainer:{
-        overflowY: 'scroll',
-        maxHeight:"calc(100vh - 280px)",
-        "&::-webkit-scrollbar":{
-            width: "0.5em",
-            height: "0.5em",
-        },
-        "&::-webkit-scrollbar-thumb":{
-            backgroundColor: "rgb(194, 70, 120, 0.3)",
-            borderRadius: "3px" 
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-            background: "rgb(194, 70, 120, 0.5)",
-            cursor: "pointer"
-         }
+        overflowY: "auto",
+        maxHeight:"calc(100vh - 250px)",
+        // "&::-webkit-scrollbar":{
+        //     width: "0.5em",
+        //     height: "0.5em",
+        // },
+        // "&::-webkit-scrollbar-thumb":{
+        //     backgroundColor: "rgb(194, 70, 120, 0.3)",
+        //     borderRadius: "3px" 
+        // },
+        // "&::-webkit-scrollbar-thumb:hover": {
+        //     background: "rgb(194, 70, 120, 0.5)",
+        //     cursor: "pointer"
+        //  }
     },
     paper:{
         padding: theme.spacing(1,1,1,2),

@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
+import TitleForNavbar from './titleForNavbar';
 
 //Material-ui Core
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -33,13 +34,35 @@ import ListItemLink from './ListItemLink';
 export default function HandleNavbar (props){
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [urlForTitle, setUrlForTitle] = React.useState(window.location.href.slice(22));
 
     function handleDrawerOpen(){
         setOpen(true);
     }
+
     function handleDrawerClose(){
         setOpen(false);
     }
+
+    (() => {
+        console.log("buraya gel location href", window.location.href.slice(21))
+        switch(window.location.href.slice(21)){
+            case '/':
+                props.setNavbarTitle('Dashboard');
+                break;
+            case '/numbers':
+                props.setNavbarTitle('Contact List');
+                break;
+            case '/forms':
+                props.setNavbarTitle('Form List')
+                break;
+            case '/calls':
+                props.setNavbarTitle('Call Logs')
+                break;
+            default:
+                props.setNavbarTitle('Call Logs')
+        }
+    })();
 
     return(
         <div className={classes.root}>
@@ -61,7 +84,7 @@ export default function HandleNavbar (props){
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap>
-                    Voice Call
+                    {props.navbarTitle}
                 </Typography>
                 </Toolbar>
             </AppBar>
@@ -89,24 +112,28 @@ export default function HandleNavbar (props){
                         classes = {classes}
                         title = "Dashboard"
                         to = "/"
+                        setNavbarTitle = {props.setNavbarTitle}
                     />
                     <ListItemLink
                         icon = {<ContactPhoneIcon />}
                         classes = {classes}
                         title = "Contact List"
                         to = "/numbers"
+                        setNavbarTitle = {props.setNavbarTitle}
                     />
                     <ListItemLink
                         icon = {<DescriptionIcon />}
                         classes = {classes}
                         title = "Form List"
                         to = "/forms"
+                        setNavbarTitle = {props.setNavbarTitle}
                     />
                     <ListItemLink
                         icon = {<AssignmentTurnedInIcon />}
                         classes = {classes}
-                        title = "Submissions"
-                        to = "/submissions"
+                        title = "Call Logs"
+                        to = "/calls"
+                        setNavbarTitle = {props.setNavbarTitle}
                     />
                 </List>
             </Drawer>

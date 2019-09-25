@@ -1,9 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 
 import useStyles from '../themes/formListTheme';
 import AddedNumber from '../components/addedNumbers';
-import AddFormnNumberDialog from './addFormNumber'
+import AddFormnNumberDialog from './addFormNumber';
+import InfiniteScrollComponent from './infiniteScrollComponent';
+import CreateCallComponent from './createCall';
+
 
 
 //Material-ui Core
@@ -21,6 +25,7 @@ import Fab from '@material-ui/core/Fab'
 //Material-ui Icons
 import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
 
 export default function FormList (props){
     const classes = useStyles();
@@ -35,6 +40,7 @@ export default function FormList (props){
         setFilteredFormNumbers(props.formNumbers.filter(number => number.FORMNUMBER == id));
         setFiltered(true);
         setAddButtonVisibility(true);
+        props.handleFetchFormNumber(id);
     }
 
     function handleNotAdded(){
@@ -49,12 +55,19 @@ export default function FormList (props){
         <div className={classes.root}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>
-                    <Paper className={[classes.paper, classes.gridContainer].join(" ")}>
+                    <Paper id="scroll" className={[classes.paper, classes.gridContainer].join(" ")}>
                         <Toolbar className={[classes.toolbar, classes.header].join(" ")}>
                             <Typography variant="h6" noWrap>
                                 Form List
                             </Typography>
                         </Toolbar>
+                        <InfiniteScrollComponent
+                            target="scroll"
+                            next = {props.handleFetchForm}
+                            data = {props.forms}
+                            hasMore = {props.formFetching.hasMore}
+                            emptyText = "There is no Form."
+                        >
                         <List>
                             {props.forms.map(form => {
                                 return (
@@ -64,30 +77,59 @@ export default function FormList (props){
                                         })}
                                     >
                                         <ListItemIcon className={classes.ListIcon}>
-                                            <InsertDriveFileIcon />
+                                            <LibraryBooksOutlinedIcon />
                                         </ListItemIcon>
                                         <ListItemText primary={form.TITLE} />
                                     </ListItem>
                                 )
                             })}
                         </List>
+                        </InfiniteScrollComponent>
                     </Paper>
                 </Grid>
                 <Grid item xs= {12} md = {9} >
                     <AddedNumber 
-                        formNumbers={filtered ? filteredFormNumbers : [] }
                         selectedForm = {selectedForm}
-                        numbers2 = {props.formNumbers}
+                        formNumbers = {props.formNumbers}
                         handleDelFormNumber = {props.handleDelFormNumber}
+                        setNavbarTitle = {props.setNavbarTitle}
                     />
                 </Grid>
-            </Grid>{addButtonVisibility ? <div style={{position:"absolute",bottom:10,right:70}}>
-                <Fab color="secondary" onClick={fetch("http://localhost:3001/createcall/92293453650964")}>
+            </Grid>
+            {/* {addButtonVisibility ? <div style={{position:"absolute",bottom:10,right:70}}>
+                <Fab color="secondary" onClick={() => axios({
+                    method: "POST",
+                    url: `https://68c652b3.ngrok.io/createcall/${selectedForm}`,
+                    data: {
+                        formNumber: props.formNumbers
+                    }
+                    ,
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                })
+                }>
                     <PhoneInTalkIcon />
                 </Fab> 
             </div>: ""
                 
-            }
+            } */}
+            {addButtonVisibility ? 
+            <CreateCallComponent 
+                handleCreateCall = {() => axios({
+                    method: "POST",
+                    url: `https://68c652b3.ngrok.io/createcall/${selectedForm}`,
+                    data: {
+                        formNumber: props.formNumbers
+                    }
+                    ,
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    }
+                })
+
+                }
+            /> : null}
             
             {addButtonVisibility ? 
             

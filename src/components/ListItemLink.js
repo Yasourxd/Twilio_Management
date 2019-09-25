@@ -8,15 +8,33 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 
 export default class ListItemLink extends PureComponent {
+    constructor(props){
+        super(props)
+    }
 
     render() {
-        const {icon, classes, title, to } = this.props;
-
+        const {icon, classes, title, to, setNavbarTitle } = this.props;
         return (
-        <ListItem button component={NavLink} exact to={to} activeClassName={classes.active}>
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText primary={title} />
-        </ListItem>
-        );
+            <div>
+                {to == '/' ? 
+                    <ListItem button component={NavLink} exact to={to} activeClassName={classes.active} onClick = {() => setNavbarTitle(title)}>
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText primary={title}/>
+                    </ListItem> :
+                    <ListItem button component={NavLink} to={to} activeClassName={classes.active} onClick = {() => setNavbarTitle(title)}>
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText primary={title}/>
+                    </ListItem>
+            
+                }
+
+
+                {/* <ListItem button component={NavLink} exact to={to} activeClassName={classes.active}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={title}/>
+                </ListItem> */}
+            </div>
+
+        )
     }
 }

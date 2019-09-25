@@ -1,4 +1,8 @@
-function formNumberReducer (state = {formNumbers:[] },action){
+const initialState = {
+    formNumbers: []
+}
+
+function formNumberReducer (state = initialState, action){
     switch(action.type){
         case 'ADD_FORMNUMBER':
             return{
@@ -8,6 +12,8 @@ function formNumberReducer (state = {formNumbers:[] },action){
             return{
                 formNumbers: state.formNumbers.filter(number => number.ID != action.payload)
             }
+        case 'RESET_FORMNUMER':
+            return initialState;
         default:
             return state;
     }

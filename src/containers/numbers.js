@@ -51,7 +51,7 @@ class Numbers extends React.Component{
 
 const mapStateToProps = function(state){
     return {
-        numbers: state.numberReducer.numbers
+        numbers: state.contactList.numbers
     }
 }
 

@@ -1,4 +1,8 @@
-function formReducer (state = { forms: [] }, action){
+const initialState = {
+    forms: []
+}
+
+function formReducer (state = initialState, action){
     switch(action.type){
         case 'ADD_FORM':
             return {

@@ -6,7 +6,9 @@ import HandleDasboard from '../components/dashboard';
 class Dashboard extends React.Component{
     render(){
         return(
-            <HandleDasboard>
+            <HandleDasboard
+                cards = {this.props.cards}
+            >
                 {this.props.children}
             </HandleDasboard>
         )
@@ -14,7 +16,8 @@ class Dashboard extends React.Component{
 }
 const mapStateToProps = function(state){
     return {
-        numbers: state.numbers
+        numbers: state.numbers,
+        cards: state.dashCards.cards
     }
 }
 export default connect(mapStateToProps)(Dashboard);

@@ -90,6 +90,9 @@ export default function AddnumberDialog(props) {
           />
         </DialogContent>
         <DialogActions>
+        <Button onClick={() => handleClose()} color="primary">
+            Cancel
+          </Button>
           <Button onClick={() => handleSubmit(5)} color="primary">
             Add
           </Button>

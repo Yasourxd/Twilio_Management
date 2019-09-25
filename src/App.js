@@ -3,11 +3,12 @@ import axios from 'axios'
 import Navbar from './containers/navbar';
 import Dashboard from './containers/dashboard';
 import Numbers from './containers/numbers';
-import Submissions from './containers/submissions';
+import Calls from './containers/callsContainer';
 import FormContainer from './containers/formContainer';
-import LoadingComponent from './containers/loadingContainer'
+import LoadingComponent from './containers/loadingContainer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { createStore } from 'redux';
 import rootReducer from './reducers/rootReducer';
 import { Provider } from 'react-redux';
@@ -15,30 +16,42 @@ import { Provider } from 'react-redux';
 import addNumber from './actions/addNumberAction';
 import addForm from './actions/addFormAction';
 import addFormNumber from './actions/addFormNumberAction';
+import addCallLog from './actions/addCallLogsAction'
 import setFetch from './actions/setFetchAction';
+import logDetails from './actions/logDetailsAction';
+import setDashboardCards from './actions/setDashboardCardsAction';
 
 
 var store = createStore(rootReducer,{},
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
 )
 
 class App extends React.Component{
   constructor(props){
     super(props)
+
+    this.state = {
+      link: 'https://83a8c077.ngrok.io'
+    }
   }
 
   
 
   componentWillMount(){
     axios.all([
-      axios.get('http://localhost:3636/numbers/1'),
-      axios.get('http://localhost:3636/forms/69144066531945e2a1979e118a0b3ddd'),
-      axios.get('http://localhost:3636/formnumbers/1')
-    ]).then(axios.spread((numbers, forms, formNumbers) => {
+      axios.get(`${this.state.link}/logs/1`),
+      axios.get(`${this.state.link}/numbers/1`),
+      axios.get(`${this.state.link}/forms/69144066531945e2a1979e118a0b3ddd`),
+      axios.get(`${this.state.link}/dashboard/1`)
+      
+      // axios.get('http://localhost:3636/formnumbers/1')
+    ]).then(axios.spread((callLogs, numbers, forms, cards) => {
       numbers.data.data.map(item => store.dispatch(addNumber(item.PHONEID, item.FNAME, item.LNAME, item.PHONE)));
-      forms.data.data.map(item => store.dispatch(addForm(item.id, item.title)))
-      formNumbers.data.data.map(item => store.dispatch(addFormNumber(item.FORMID, item.FORMNUMBER, item.PHONEID, item.FNAME, item.LNAME, item.PHONE)))
-      store.dispatch(setFetch(true))
+      forms.data.data.map(item => store.dispatch(addForm(item.id, item.title)));
+      callLogs.data.data.map(item => store.dispatch(addCallLog(item.LOGID, item.CALLSTATUS, item.FORMID, item.SUBID, item.CALLSID, item.FNAME, item.LNAME, item.PHONE, item.FORMNUMBER)));
+      cards.data.data.map(item => store.dispatch(setDashboardCards(item.TOTALCALL, item.CALL1, item.CALL2, item.TOTALNUMBER, item.NUMBER1, item.NUMBER2, item.TOTALSUB, item.SUB1, item.SUB2, item.TOTALFAILED, item.FAILED1, item.FAILED2)))
+      // formNumbers.data.data.map(item => store.dispatch(addFormNumber(item.FORMID, item.FORMNUMBER, item.PHONEID, item.FNAME, item.LNAME, item.PHONE)))
+      store.dispatch(setFetch(true));
     }))
     
       // fetch('http://localhost:3636/numbers/1')
@@ -64,12 +77,12 @@ class App extends React.Component{
       <Provider store={store}>
         <LoadingComponent>
           <Router>
-            <Navbar>
-                <Route exact path="/" component={Dashboard} />
-                <Route path="/numbers" component={Numbers} />
-                <Route path="/forms" component={FormContainer} />
-                <Route path="/submissions" component={Submissions} />
-            </Navbar>
+              <Navbar>
+                  <Route exact path="/" component={Dashboard} />
+                  <Route path="/numbers" component={Numbers} />
+                  <Route path="/forms" component={FormContainer} />
+                  <Route path="/calls/:callSID?" component={Calls} />
+              </Navbar>
           </Router>
         </LoadingComponent>
     </Provider>
