@@ -55,9 +55,9 @@ export default function FormList (props){
         <div className={classes.root}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={3}>
-                    <Paper id="scroll" className={[classes.paper, classes.gridContainer].join(" ")}>
+                    <Paper id="scroll" className={[classes.paper, classes.gridContainer].join(" ")} elevation={0}>
                         <Toolbar className={[classes.toolbar, classes.header].join(" ")}>
-                            <Typography variant="h6" noWrap>
+                            <Typography variant="h6" noWrap >
                                 Form List
                             </Typography>
                         </Toolbar>
@@ -76,10 +76,10 @@ export default function FormList (props){
                                             [classes.active]: selectedForm == form.ID
                                         })}
                                     >
-                                        <ListItemIcon className={classes.ListIcon}>
+                                        {/* <ListItemIcon className={classes.ListIcon}>
                                             <LibraryBooksOutlinedIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary={form.TITLE} />
+                                        </ListItemIcon> */}
+                                        <ListItemText primary={form.TITLE}/>
                                     </ListItem>
                                 )
                             })}
@@ -93,6 +93,7 @@ export default function FormList (props){
                         formNumbers = {props.formNumbers}
                         handleDelFormNumber = {props.handleDelFormNumber}
                         setNavbarTitle = {props.setNavbarTitle}
+                        numbers = {props.numbers}
                     />
                 </Grid>
             </Grid>
@@ -118,7 +119,7 @@ export default function FormList (props){
             <CreateCallComponent 
                 handleCreateCall = {() => axios({
                     method: "POST",
-                    url: `https://68c652b3.ngrok.io/createcall/${selectedForm}`,
+                    url: `https://6a79ab57.ngrok.io/createcall/${selectedForm}`,
                     data: {
                         formNumber: props.formNumbers
                     }

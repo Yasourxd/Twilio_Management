@@ -9,7 +9,7 @@ export default function MainLoading(props){
         <RiseLoader 
             sizeUnit={"px"}
             size={props.size}
-            color={'#a73594'}
+            color={'#2ecc71'}
         />
         </div>
     )

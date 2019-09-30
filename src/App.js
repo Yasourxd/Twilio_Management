@@ -20,6 +20,7 @@ import addCallLog from './actions/addCallLogsAction'
 import setFetch from './actions/setFetchAction';
 import logDetails from './actions/logDetailsAction';
 import setDashboardCards from './actions/setDashboardCardsAction';
+import setGraphData from './actions/setGraphAction';
 
 
 var store = createStore(rootReducer,{},
@@ -31,7 +32,7 @@ class App extends React.Component{
     super(props)
 
     this.state = {
-      link: 'https://83a8c077.ngrok.io'
+      link: 'https://dfff6335.ngrok.io'
     }
   }
 
@@ -39,17 +40,19 @@ class App extends React.Component{
 
   componentWillMount(){
     axios.all([
-      axios.get(`${this.state.link}/logs/1`),
+      axios.post(`${this.state.link}/logs/1`),
       axios.get(`${this.state.link}/numbers/1`),
       axios.get(`${this.state.link}/forms/69144066531945e2a1979e118a0b3ddd`),
-      axios.get(`${this.state.link}/dashboard/1`)
+      axios.get(`${this.state.link}/dashboard/1`),
+      axios.get(`${this.state.link}/graph/1`)
       
       // axios.get('http://localhost:3636/formnumbers/1')
-    ]).then(axios.spread((callLogs, numbers, forms, cards) => {
+    ]).then(axios.spread((callLogs, numbers, forms, cards, graphData) => {
       numbers.data.data.map(item => store.dispatch(addNumber(item.PHONEID, item.FNAME, item.LNAME, item.PHONE)));
       forms.data.data.map(item => store.dispatch(addForm(item.id, item.title)));
       callLogs.data.data.map(item => store.dispatch(addCallLog(item.LOGID, item.CALLSTATUS, item.FORMID, item.SUBID, item.CALLSID, item.FNAME, item.LNAME, item.PHONE, item.FORMNUMBER)));
       cards.data.data.map(item => store.dispatch(setDashboardCards(item.TOTALCALL, item.CALL1, item.CALL2, item.TOTALNUMBER, item.NUMBER1, item.NUMBER2, item.TOTALSUB, item.SUB1, item.SUB2, item.TOTALFAILED, item.FAILED1, item.FAILED2)))
+      store.dispatch(setGraphData(graphData.data.data));
       // formNumbers.data.data.map(item => store.dispatch(addFormNumber(item.FORMID, item.FORMNUMBER, item.PHONEID, item.FNAME, item.LNAME, item.PHONE)))
       store.dispatch(setFetch(true));
     }))

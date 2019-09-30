@@ -24,12 +24,13 @@ const useStyles = makeStyles(theme => ({
     paper:{
         padding: theme.spacing(1,1,1,2),
         textAlign: 'center',
+        color:"#b2b5c8",
     },
     test:{
         background:"black"
     },
     inputRoot: {
-        color: 'inherit',
+        color: "#b2b5c8",
     },
     inputInput: {
         transition: theme.transitions.create('width'),

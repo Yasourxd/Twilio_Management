@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
         color:'white',
     },
     cardTitle:{
-        fontSize:"18px",
+        fontSize:"22px",
         alignItems:"center",
         justifyContent:"center",
         display:"flex",
@@ -22,24 +22,25 @@ const useStyles = makeStyles(theme => ({
         background: "#00BCD4",
     },
     card2:{
-        background: "#FF5252",
+        background: "#FFA726",
     },
     card3:{
-        background: "#FFA726"
+        background: "#66Ba6A",
     },
     card4:{
-        background: "#66Ba6A"
+        background: "#FF5252",
     },
     card: {
         marginTop: "10px",
         marginRight: "10px",
     },
     cardBody:{
-        fontSize:"30px",
+        fontSize:"65px",
+        fontWeight:"500",
         margin:"10px 0px 10px 0px"
     },
     cardFooter:{
-        fontSize: "14px",
+        fontSize: "18px",
         display: "flex",
         justifyContent:"center",
         alignItems: "center"

@@ -20,7 +20,7 @@ export default function AddnumberDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [FNAME, setFNAME] = React.useState('');
   const [LNAME, setLNAME] = React.useState('');
-  const [PHONE, setPHONE] = React.useState('90');
+  const [PHONE, setPHONE] = React.useState('+90');
   const classes = useStyles();
 
   function handleClickOpen() {

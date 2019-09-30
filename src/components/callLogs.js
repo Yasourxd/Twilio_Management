@@ -65,7 +65,7 @@ export default function CallLogs(props){
                                 return (
                                     <ExpansionPanel
                                         expanded = {urlExpanded == item.CALLSID}
-                                        style = {{marginTop:"6px"}}
+                                        className={classes.expansionBase}
                                         onChange = {handleChange(item.CALLSID)}
                                         onClick = {() => props.handleAddLogDetail(item.LOGID, item.CALLSID)}>
                                         <ExpansionPanelSummary

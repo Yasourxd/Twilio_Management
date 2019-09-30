@@ -7,23 +7,28 @@ import green from '@material-ui/core/colors/green';
 
 const useStyles = makeStyles(theme => ({
     callBase:{
-        padding:"10px 20px",
-        border:"1px solid",
+        padding:"8px 16px",
+        border:"2px solid",
         textAlign:"center",
-        borderRadius: "10px",
+        borderRadius: "6px",
         minWidth:"10px",
+        color:"#7f8c8d",
+        borderColor: "#7f8c8d",
+        fontSize:"13px",
+        fontWeight:"500",
+        textTransform:"uppercase"
     },
     yellowCase:{
-        color:yellow[800],
-        borderColor:yellow[800]
+        color:"#ff8a01",
+        borderColor:"#ff8a01"
     },
     redCase: {
-        color: red[700],
-        borderColor: red[700]
+        color: "#dd3834",
+        borderColor: "#dd3834"
     },
     greenCase: {
-        color: green[700],
-        borderColor: green[700]
+        color: "#008759",
+        borderColor: "#008759"
     }
 }))
 

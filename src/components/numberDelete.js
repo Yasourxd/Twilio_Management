@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 
 //Material-ui Icons
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -23,12 +24,18 @@ export default function DeleteNumber(props){
     function handleClose(){
         setOpen(false);
     }
+    function handleDell(){
+        setOpen(false);
+        props.action(props.ID);
+    }
 
     return(
-        <div style={{marginLeft:"10px"}}>
-            <Fab size="small" color="secondary" arial-label="remove-number" onClick={() => handleOpen()}>
+        <div>
+            {/* <Fab size="small" color="secondary" arial-label="remove-number" onClick={() => handleOpen()}> */}
+            <IconButton arial-label = "delete" onClick={() => handleOpen()}>
                 <DeleteIcon />
-            </Fab>
+            </IconButton>
+            {/* </Fab> */}
             <Dialog open={open} onClose={handleClose} arial-labelledby="delete-number">
                 <DialogTitle id="delete-number">{props.title}</DialogTitle>
                 <DialogContent>
@@ -40,7 +47,7 @@ export default function DeleteNumber(props){
                     <Button color="secondary" onClick={() => handleClose()}>
                         Cancel
                     </Button>
-                    <Button color="primary" onClick={() => props.action(props.ID)}>
+                    <Button color="primary" onClick={() => handleDell()}>
                         Remove
                     </Button>
                 </DialogActions>

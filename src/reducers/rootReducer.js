@@ -9,6 +9,7 @@ import callLogsReducer from './callLogsReducer';
 import logDetailsReducer from './logDetailRecuder';
 import navbarReducer from './navbarReducer';
 import dashboardCardReducer from './dashboardCardReducer';
+import graphReducer from './graphReducer';
 
 const rootReducer = combineReducers({
     contactList: numberReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     callLogs: callLogsReducer,
     logDetails: logDetailsReducer,
     navbar: navbarReducer,
-    dashCards: dashboardCardReducer
+    dashCards: dashboardCardReducer,
+    graph: graphReducer
 })
 
 

@@ -9,6 +9,7 @@ import UpdatenumberDialog from './updateNumber';
 import InfiniteScrollComponent from './infiniteScrollComponent';
 import CallStatusComponent from './callStatusComponent';
 import DeleteNumber from './numberDelete';
+import MyMenuItem from './menuItem';
 
 //Material-ui Core
 import Grid from '@material-ui/core/Grid';
@@ -22,10 +23,13 @@ import TableBody from '@material-ui/core/TableBody';
 import Fab from '@material-ui/core/Fab';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton'
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 //Material-ui Icons
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 export default function AddedNumber (props){
@@ -33,6 +37,7 @@ export default function AddedNumber (props){
     var [filter, setFilter] = React.useState(false);
     var [numbers, setNumbers] = React.useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const {formNumbers} = props
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -46,16 +51,26 @@ export default function AddedNumber (props){
         setNumbers(props.formNumbers.filter(number => number.FNAME.includes(value) || number.LNAME.includes(value) || number.PHONE.includes(value) || number.CALLSTATUS.includes(value)));
         setFilter(true);
     }
+    const handleSubTab = (formNumber, subID) => {
+        window.open(`https://www.jotform.com/inbox/${formNumber}/${subID}`, '_blank');
+        handleClose();
+
+    }
 
     return (
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paper} elevation={0} style={{}}>
                         <InputBase 
-                            placeholder="Search..."
+                            placeholder="Search"
                             className={[classes.inputRoot, classes.inputInput].join(' ')}
-                            inputProps={{'arial-label': 'search'}}
+                            startAdornment={
+                                <IconButton size="small" style={{backgroundColor:"transparent",cursor:"default", pointerEvents:"none"}}>
+                                    <SearchIcon style={{marginRight:"10px"}}/>
+                                </IconButton>
+                              }
+                              
                             onChange = {e => {
                                 handleFilter(e.target.value);
                                 console.log(e.target.value);
@@ -64,11 +79,11 @@ export default function AddedNumber (props){
                     </Paper>
                 </Grid>
                 <Grid item xs={12} >
-                    <Paper id = "scroll" className={[classes.paper, classes.gridContainer, classes.space].join(' ')} >
+                    <Paper id = "scroll" className={[classes.paper, classes.gridContainer, classes.space].join(' ')} elevation={0}>
                         <InfiniteScrollComponent
                             target="scroll"
                             data = {props.formNumbers}
-                            emptyText = "There is no number is registered for selected form."
+                            emptyText = "No number is registered for selected form"
                         >
                         <Table>
                             <TableHead>
@@ -84,9 +99,10 @@ export default function AddedNumber (props){
                             <TableBody>
                             
                                 {
-                                    (filter ? numbers : props.formNumbers).map((number, count=0) => {
+                                    (filter ? numbers : formNumbers).map((number, count=0) => {
                                         return (
                                             <TableRow>
+                                                {console.log(number)}
                                                 <TableCell>{++count}</TableCell>
                                                 <TableCell>{number.FNAME.charAt(0).toUpperCase() + number.FNAME.slice(1)}</TableCell>
                                                 <TableCell>{number.LNAME.charAt(0).toUpperCase() + number.LNAME.slice(1)}</TableCell>
@@ -96,42 +112,35 @@ export default function AddedNumber (props){
                                                         status = {number.CALLSTATUS}
                                                     />
                                                 </TableCell>
-                                                <TableCell align="right" style={{display:"flex"}}>
+                                                <TableCell align="right" style={{display:"flex", alignItems:"center"}}>
                                                     
                                                     
                                                     {/* <Fab size="small" color="secondary" arial-label="Delete" onClick={() => props.handleDelFormNumber(number.ID)} className={classes.deleteButton}>
                                                         <DeleteIcon />
                                                     </Fab> */}
+                                                    {
+                                                        number.CALLSTATUS == 'Success' || number.CALLSTATUS == 'Failed' ?
+                                                            <div>
+                                                                {/* <Fab size="small" arial-label="Detail-Menu" onClick = {handleClick}> */}
+                                                                {console.log("subID", number.SUBID)}
+                                                                <IndividualMenu 
+                                                                    number = {number}
+                                                                    setNavbarTitle = {props.setNavbarTitle}
+                                                                />
+                                                                
+                                                                {/* </Fab> */}
+                                                                
+                                                            </div>
+                                                            
+                                                            
+                                                        : null
+                                                    }
                                                     <DeleteNumber 
                                                         title= "Do you really want to remove the number from this form?"
                                                         subtitle= "You are removing the number from this form. This action will not delete the number in your contact list. You can add this number to this form again anytime you want."
                                                         action= {props.handleDelFormNumber}
                                                         ID = {number.ID}
                                                     />
-                                                    {
-                                                        number.CALLSTATUS == 'Success' ?
-                                                            <div>
-                                                                <Fab size="small" color="primary" arial-label="Detail-Menu" onClick = {handleClick}>
-                                                                    <MoreHorizIcon />
-                                                                </Fab>
-                                                                <Menu style={{marginTop:"60px"}}
-                                                                    id="Detail-Menu"
-                                                                    anchorEl={anchorEl}
-                                                                    keepMounted
-                                                                    open={Boolean(anchorEl)}
-                                                                    onClose={handleClose}
-                                                                >
-                                                                    <MenuItem onClick={() => {
-                                                                        window.open(`https://www.jotform.com/inbox/${number.FORMNUMBER}/${number.SUBID}`, '_blank');
-                                                                        handleClose();
-                                                                    }}>Submission</MenuItem>
-                                                                    <MenuItem><Link style={{color:'inherit', textDecoration:'none'}} to={`/calls/${number.CALLSID}`} onClick={() => props.setNavbarTitle('Call Logs')}>Call Log</Link></MenuItem>
-                                                                </Menu>
-                                                            </div>
-                                                            
-                                                            
-                                                        : null
-                                                    }
                                                     {
                                                         number.CALLSTATUS == 'Failed' || number.CALLSTATUS == 'Not Started'?
                                                         <RecallComponent 
@@ -141,9 +150,9 @@ export default function AddedNumber (props){
                                                             action = {
                                                                 () => axios({
                                                                     method: "POST",
-                                                                    url: `https://68c652b3.ngrok.io/createcall/${number.FORMNUMBER}`,
+                                                                    url: `https://6a79ab57.ngrok.io/createcall/${number.FORMNUMBER}`,
                                                                     data: {
-                                                                        formNumber: number
+                                                                        formNumber: Array(number)
                                                                     }
                                                                     ,
                                                                     headers: {
@@ -154,7 +163,6 @@ export default function AddedNumber (props){
                                                         />
                                                         : null
                                                     }
-                                                    
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -170,6 +178,45 @@ export default function AddedNumber (props){
                     </Paper>
                 </Grid>
             </Grid>
+        </div>
+    )
+}
+
+const IndividualMenu  = props => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+    function handleClose(){
+        setAnchorEl(null);
+    };
+    
+    function handleSubTab(formNumber, subID){
+        window.open(`https://www.jotform.com/inbox/${formNumber}/${subID}`, '_blank');
+        handleClose();
+    }
+
+    return (
+        <div>
+        <IconButton arial-label="more" onClick = {handleClick}>
+            <MoreHorizIcon/>
+        </IconButton>
+        <Menu style={{marginTop:"60px"}}
+            id="Detail-Menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+        >
+            <MenuItem onClick={() => handleSubTab(props.number.FORMNUMBER, props.number.SUBID)}>Submission</MenuItem>
+            {/* <MyMenuItem 
+                formNumber = {number.FORMNUMBER}
+                subID = {number.SUBID}
+                title= "Submission"
+            /> */}
+            <MenuItem><Link style={{color:'inherit', textDecoration:'none'}} to={`/calls/${props.number.CALLSID}`} onClick={() => props.setNavbarTitle('Call Logs')}>Call Log</Link></MenuItem>
+        </Menu>
         </div>
     )
 }

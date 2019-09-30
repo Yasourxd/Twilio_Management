@@ -54,7 +54,7 @@ export default function HandleNavbar (props){
                 props.setNavbarTitle('Contact List');
                 break;
             case '/forms':
-                props.setNavbarTitle('Form List')
+                props.setNavbarTitle('Call Management')
                 break;
             case '/calls':
                 props.setNavbarTitle('Call Logs')
@@ -124,7 +124,7 @@ export default function HandleNavbar (props){
                     <ListItemLink
                         icon = {<DescriptionIcon />}
                         classes = {classes}
-                        title = "Form List"
+                        title = "Call Management"
                         to = "/forms"
                         setNavbarTitle = {props.setNavbarTitle}
                     />

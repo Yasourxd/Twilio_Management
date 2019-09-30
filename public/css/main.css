@@ -1,0 +1,87 @@
+.MuiTableCell-head{
+    font-size:14px !important;
+    text-transform: uppercase;
+    color:#141e46 !important
+}
+.MuiTableCell-root{
+    border-bottom:1px solid #d3d6ec !important;
+    border-collapse: separate !important;
+}
+.MuiTable-root{
+    border-collapse: separate !important;
+}
+.MuiTableCell-body{
+    color:#2b3245 !important;
+    letter-spacing: 0.4px !important;
+    font-size:16px !important;
+}
+.MuiFab-secondary{
+    background-color:#2ecc71 !important;
+}
+.MuiFab-secondary:hover{
+    background-color: #29b765 !important;
+}
+.MuiFab-primary{
+    background-color: #1e3799 !important;
+}
+.MuiFab-primary:hover{
+    background-color: #1a3189 !important;
+}
+.MuiFab-root{
+    box-shadow:0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.04), 0px 1px 18px 0px rgba(0,0,0,0.02);
+}
+div[class^="MuiPaper-root"]{
+    border-radius:6px;
+    /* border:1px solid #b2b5c8 !important; */
+    box-shadow:0px 1px 3px 0px rgba(0,0,0,0.06), 0px 1px 1px 0px rgba(0,0,0,0.04), 0px 2px 1px -1px rgba(0,0,0,0.02)
+}
+.emptyView{
+    min-height: 500px;
+    margin:"10px auto 0px auto";
+    border-radius: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size:"1.5rem";
+    color:#2b3245 !important;
+    margin-top:8px;
+}
+.emptyView svg{
+    font-size:50px;
+
+}
+.MuiInputBase-input{
+    color:#2b3245 !important;
+}
+.MuiListItemText-root{
+    letter-spacing: 0.4px !important;
+}
+.MuiExpansionPanel-root:before{
+    background-color:transparent !important
+}
+.MuiTypography-body2{
+    font-size:16px !important;
+    color:#2b3245 !important;
+    font-weight: 500 !important;
+}
+.callLogIcon{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.callLogIconGreen{
+    border:1px solid #2ecc71;
+    background: #2ecc71;
+}
+.callLogIconRed{
+    border:1px solid #dd3834;
+    background: #dd3834;
+}
+.callLogIcon svg{
+    fill:white;
+    font-size:28px;
+}

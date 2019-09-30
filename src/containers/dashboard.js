@@ -8,6 +8,7 @@ class Dashboard extends React.Component{
         return(
             <HandleDasboard
                 cards = {this.props.cards}
+                graph = {this.props.graph}
             >
                 {this.props.children}
             </HandleDasboard>
@@ -17,7 +18,8 @@ class Dashboard extends React.Component{
 const mapStateToProps = function(state){
     return {
         numbers: state.numbers,
-        cards: state.dashCards.cards
+        cards: state.dashCards.cards,
+        graph: state.graph.graph
     }
 }
 export default connect(mapStateToProps)(Dashboard);

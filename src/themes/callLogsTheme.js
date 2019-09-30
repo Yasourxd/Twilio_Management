@@ -70,6 +70,9 @@ const useStyles = makeStyles(theme => ({
         flexShrink: 0,
         textAlign:"left",
         color: "rgba(0, 0, 0, 0.8)",
+        fontSize:"14px",
+        textTransform:"uppercase",
+        fontWeight:"500"
     },
     collapseBody: {
         fontSize: theme.typography.pxToRem(13),
@@ -77,11 +80,19 @@ const useStyles = makeStyles(theme => ({
         flexShrink: 0,
         textAlign:"left",
         color: "rgba(0, 0, 0, 0.54)",
+        fontSize:"16px"
     },
     toolbar:{
         // borderBottom:"1px solid rgba(224, 224, 224)",
         minHeight: "40px"
     },
+    expansionBase:{
+        marginTop:"6px",
+        minHeight:"100px",
+        display:"flex",
+        justifyContent:"center",
+        flexDirection:"column"
+    }
 }))
 
 export default useStyles;

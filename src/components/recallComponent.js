@@ -9,6 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
+import IconButton from '@material-ui/core/IconButton';
 
 //Material-ui Icons
 import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
@@ -23,11 +24,17 @@ export default function RecallComponent(props){
     function handleClose(){
         setOpen(false);
     }
+    function handleCall(){
+        setOpen(false);
+        props.action();
+    }
     return (
         <div>
-            <Fab size="small" color="primary" arial-label="recall" onClick = {() => handleOpen()} >
+            {/* <Fab size="small" color="primary" arial-label="recall" onClick = {() => handleOpen()} > */}
+            <IconButton arial-label="re-call" onClick = {() => handleOpen()}>
                 <PhoneInTalkIcon />
-            </Fab>
+            </IconButton>
+            {/* </Fab> */}
             <Dialog open={open} onClose={handleClose} arial-labelledby="recall-title">
                 <DialogTitle id="recall-title">{props.title}</DialogTitle>
                 <DialogContent>
@@ -39,7 +46,7 @@ export default function RecallComponent(props){
                     <Button color="secondary" onClick={() => handleClose()}>
                         Cancel
                     </Button>
-                    <Button color="primary" onClick = {props.action}>
+                    <Button color="primary" onClick = {() => handleCall()}>
                         Call
                     </Button>
                 </DialogActions>

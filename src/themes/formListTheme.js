@@ -20,11 +20,11 @@ const useStyles = makeStyles(theme => ({
             height: "0.5em",
         },
         "&::-webkit-scrollbar-thumb":{
-            backgroundColor: "rgb(194, 70, 120, 0.3)",
+            backgroundColor: "rgb(0, 0,0 , 0.3)",
             borderRadius: "3px" 
         },
         "&::-webkit-scrollbar-thumb:hover": {
-            background: "rgb(194, 70, 120, 0.5)",
+            background: "rgb(0, 0, 0, 0.5)",
             cursor: "pointer"
          }
     },

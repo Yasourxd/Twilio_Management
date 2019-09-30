@@ -21,62 +21,11 @@ import useStyles from '../themes/dashboardTheme';
 
 export default function HandleDashboard(props){
     const classes = useStyles();
-    const data = [
-        {
-          "id": "Phone Numbers",
-          "data": [
-            {
-              "x": "2019-09-11",
-              "y": 6
-            },
-            {
-                "x": "2019-09-12",
-                "y": 3
-            },
-            {
-                "x": "2019-09-13",
-                "y": 1
-            },
-            {
-                "x": "2019-09-14",
-                "y": 4
-            },
-            {
-                "x": "2019-09-15",
-                "y": 4
-            },
-            {
-                "x": "2019-09-16",
-                "y": 7
-            },
-            {
-                "x": "2019-09-17",
-                "y": 1
-            },
-            {
-                "x": "2019-09-18",
-                "y": 0
-            },
-            {
-                "x": "2019-09-19",
-                "y": 0
-            },
-            {
-                "x": "2019-09-20",
-                "y": 3
-            },
-            {
-                "x": "2019-09-21",
-                "y": 4
-            },
-          ]
-        }
-      ]
     return (
         <div className={classes.root}>
             <Grid container xs={12} spacing={2}>
                 <Grid item xs={6} md={3}>
-                    <Paper className={[classes.paper,classes.card1].join(' ')}>
+                    <Paper className={[classes.paper,classes.card1].join(' ')} elevation={0} style={{border:"none"}}>
                         <Typography
                             variant="h6"
                             className={classes.cardTitle}
@@ -93,12 +42,12 @@ export default function HandleDashboard(props){
                             variant="h6"
                             className={classes.cardFooter}
                         >
-                            {((props.cards.sub2 - props.cards.sub1) <= props.cards.sub1) ? <ExpandLessIcon />: <ExpandMoreIcon /> }{Math.round(Math.abs(((props.cards.sub2 - 2 * props.cards.sub1) / (props.cards.sub2 - props.cards.sub1)) * 100))}% from last week
+                            {((props.cards.sub2 - props.cards.sub1) <= props.cards.sub1) ? <ExpandLessIcon/>: <ExpandMoreIcon/> }{Math.round(Math.abs(((props.cards.sub2 - 2 * props.cards.sub1) / (props.cards.sub2 - props.cards.sub1)) * 100))}% from last week
                         </Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                    <Paper className={[classes.paper,classes.card2].join(' ')}>
+                    <Paper className={[classes.paper,classes.card2].join(' ')} elevation={0}>
                         <Typography
                             variant="h6"
                             className={classes.cardTitle}
@@ -115,12 +64,12 @@ export default function HandleDashboard(props){
                             variant="h6"
                             className={classes.cardFooter}
                         >
-                            {((props.cards.number2 - props.cards.number1) <= props.cards.number1) ? <ExpandLessIcon />: <ExpandMoreIcon /> }{Math.round(Math.abs(((props.cards.number2 - 2 * props.cards.number1) / (props.cards.number2 - props.cards.number1)) * 100))}% from last week
+                            {((props.cards.number2 - props.cards.number1) <= props.cards.number1) ? <ExpandLessIcon/>: <ExpandMoreIcon/> }{Math.round(Math.abs(((props.cards.number2 - 2 * props.cards.number1) / (props.cards.number2 - props.cards.number1)) * 100))}% from last week
                         </Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                    <Paper className={[classes.paper,classes.card3].join(' ')}>
+                    <Paper className={[classes.paper,classes.card3].join(' ')} elevation={0}>
                         <Typography
                             variant="h6"
                             className={classes.cardTitle}
@@ -137,17 +86,17 @@ export default function HandleDashboard(props){
                             variant="h6"
                             className={classes.cardFooter}
                         >
-                            {((props.cards.call2 - props.cards.call1) <= props.cards.call1) ? <ExpandLessIcon />: <ExpandMoreIcon /> }{Math.round(Math.abs(((props.cards.call2 - 2 * props.cards.call1) / (props.cards.call2 - props.cards.call1)) * 100))}% from last week
+                            {((props.cards.call2 - props.cards.call1) <= props.cards.call1) ? <ExpandLessIcon/>: <ExpandMoreIcon/> }{Math.round(Math.abs(((props.cards.call2 - 2 * props.cards.call1) / (props.cards.call2 - props.cards.call1)) * 100))}% from last week
                         </Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} md={3}>
-                    <Paper className={[classes.paper,classes.card4].join(' ')}>
+                    <Paper className={[classes.paper,classes.card4].join(' ')} elevation={0}>
                         <Typography
                             variant="h6"
                             className={classes.cardTitle}
                         >
-                            <PhonelinkEraseOutlinedIcon fontSize="inherit" /> Declined Call
+                            <PhonelinkEraseOutlinedIcon fontSize="inherit" /> Failed Call
                         </Typography>
                         <Typography
                             variant="body1"
@@ -159,17 +108,18 @@ export default function HandleDashboard(props){
                             variant="h6"
                             className={classes.cardFooter}
                         >
-                            {((props.cards.failed2 - props.cards.failed1) <= props.cards.failed1) ? <ExpandLessIcon />: <ExpandMoreIcon /> }{Math.round(Math.abs(((props.cards.failed2 - 2 * props.cards.failed1) / (props.cards.failed2 - props.cards.failed1)) * 100))}% from last week
+                            {((props.cards.failed2 - props.cards.failed1) <= props.cards.failed1) ? <ExpandLessIcon/>: <ExpandMoreIcon/> }{Math.round(Math.abs(((props.cards.failed2 - 2 * props.cards.failed1) / (props.cards.failed2 - props.cards.failed1)) * 100))}% from last week
                         </Typography>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Paper  style={{height:"400px"}}>
+                <Grid item xs={12} md={12}>
+                    <Paper  style={{height:"400px"}} elevation={0}>
                     <ResponsiveLine
-                        data={data}
+                        data={Array(props.graph)}
                         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                         xScale={{ type: 'point' }}
                         yScale={{ type: 'linear', stacked: true, min: 'auto', max: 'auto' }}
+                        curve="linear"
                         axisTop={null}
                         axisRight={null}
                         axisBottom={{
@@ -190,9 +140,10 @@ export default function HandleDashboard(props){
                             legendOffset: -40,
                             legendPosition: 'middle'
                         }}
+                        enableGridX={false}
                         colors={{ scheme: 'nivo' }}
                         pointSize={10}
-                        pointColor={{ theme: 'background' }}
+                        pointColor={{ from: 'color', modifiers: [] }}
                         pointBorderWidth={2}
                         pointBorderColor={{ from: 'serieColor' }}
                         pointLabel="y"

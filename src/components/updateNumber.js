@@ -8,6 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
 
 
 //Material-ui Icons
@@ -48,9 +49,11 @@ export default function UpdatenumberDialog(props) {
 
   return (
     <div>
-        <Fab color="primary" aria-label="add" onClick={handleClickOpen} size="small">
-            <CreateIcon />
-        </Fab>
+        {/* <Fab color="primary" aria-label="add" onClick={handleClickOpen} size="small"> */}
+        <IconButton arial-label="Update" onClick={handleClickOpen}>
+          <CreateIcon />
+        </IconButton>
+        {/* </Fab> */}
         
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Update Phone Number</DialogTitle>

@@ -14,10 +14,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell'
 import TableBody from '@material-ui/core/TableBody';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton'
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
-
+import SearchIcon from '@material-ui/icons/Search';
 
 export default function HandleNumbers (props){
     const classes = useStyles();
@@ -33,19 +34,24 @@ export default function HandleNumbers (props){
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paper} elevation={0}>
                         <InputBase 
-                            placeholder="Search..."
+                            placeholder="Search"
                             className={[classes.inputRoot, classes.inputInput].join(' ')}
                             inputProps={{'arial-label': 'search'}}
                             onChange = {e => {
                                 handleFilter(e.target.value);
                             }}
+                            startAdornment={
+                                <IconButton size="small" style={{backgroundColor:"transparent",cursor:"default", pointerEvents:"none"}}>
+                                    <SearchIcon style={{marginRight:"10px"}}/>
+                                </IconButton>
+                              }
                         />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} >
-                    <Paper className={[classes.paper, classes.gridContainer, classes.space].join(' ')} >
+                    <Paper className={[classes.paper, classes.gridContainer, classes.space].join(' ')} elevation={0}>
                         <Table>
                             <TableHead>
                                 <TableRow>

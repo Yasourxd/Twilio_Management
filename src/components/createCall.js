@@ -26,6 +26,11 @@ export default function CreateCallComponent(props){
   function handleClose(){
     setOpen(false);
   }
+
+  function handleCall(){
+    handleClose();
+    props.handleCreateCall();
+  }
   return (
     <div>
       <Fab color="secondary" arial-label="create-call" onClick = {() => handleOpen()} className={classes.button}>
@@ -43,10 +48,7 @@ export default function CreateCallComponent(props){
           <Button color="secondary" onClick={() => handleClose()}>
             Cancel
           </Button>
-          <Button color="primary" onClick={() => {
-            props.handleCreateCall();
-            handleClose();
-          }}>
+          <Button color="primary" onClick={() => handleCall()}>
             Call
           </Button>
         </DialogActions>
